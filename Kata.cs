@@ -7,7 +7,44 @@ namespace soluations
 {
     public static class Kata
     {
+        public static int[] Binary_To_Octal(string binaryNumber)
+        {
+            List<int> result = new List<int>();
+            int Element = 0;
+            int Power = 0;
+            char[] binaryBeforeConverted = binaryNumber.ToCharArray();
+            int[] binaryAfterConverted = new int[binaryBeforeConverted.Length];
 
+            for (int i = 0; i < binaryBeforeConverted.Length; i++)
+            {
+                binaryAfterConverted[i] = Convert.ToInt32(char.GetNumericValue(binaryBeforeConverted[i]));
+            }
+
+            //binaryAfterConverted = binaryAfterConverted.Reverse().ToArray();
+
+            for (int i = 0; i < binaryAfterConverted.Length; i += 3)
+            {
+                for (int j = i; j < i + 3 && j < binaryAfterConverted.Length; j++)
+                {
+                    if(binaryAfterConverted[j] == 1)
+                    {
+                         Element += Convert.ToInt32(Math.Pow(2, Power));
+                    }
+                    else
+                    {
+                        Element += 0; //Convert.ToInt32(Math.Pow(0, Power));
+                    }
+                    Power++;
+                }
+                result.Add(Element);
+                Element = 0;
+                Power = 0;
+            }
+
+           
+
+            return result.ToArray();
+        }
         public static int[] Capitals(string word)
         {
             //Write your code here
