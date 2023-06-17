@@ -7,12 +7,88 @@ namespace soluations
 {
     public static class Kata
     {
-        public static int[] Binary_To_Octal(string binaryNumber)
+
+        public static bool KsumSubset(string datestring)
         {
-            List<int> result = new List<int>();
+
+            //To Store Only Year
+            string result = string.Empty;
+
+            for (int i = 0; i < 4; i++)
+            {
+                result += datestring[i];
+            }
+
+
+            int.TryParse(result, out int resultToInt);
+
+
+            if (!(resultToInt < DateTime.Now.Year))
+                return false;
+
+            if (!((DateTime.Now.Year - resultToInt) >= 4))
+                return false;
+
+            if (!((DateTime.Now.Year - resultToInt) <= 200))
+                return false;
+
+            return true;
+        }
+        public static string removeSpecialCharacters(string strParam)
+        {
+
+           
+            // write your code here
+            var str = strParam.ToCharArray().Where(c => char.IsWhiteSpace(c) || char.IsLetter(c) || c == '_' || c == '-');
+            return String.Join("", str);
+        }
+        public static int[] ConverStringToInt(string value)
+        {
+            int[] numbersAfterConvertedToInt = new int[value.Length];
+            for (int i = 0; i < value.Length; i++)
+            {
+                numbersAfterConvertedToInt[i] = Convert.ToInt32(value[i]) - 48;
+            }
+            return numbersAfterConvertedToInt;
+        }
+        public static string even_or_odd_or_equal(int number)
+        {
+            string numbersAfterConvertedToString = number.ToString();
+            int[] numbersAfterConvertedToInt = ConverStringToInt(numbersAfterConvertedToString);
+            int sumodd = 0;
+            int sumeven = 0;
+
+            for (int i = 0; i < numbersAfterConvertedToInt.Length; i++)
+            {
+                if(numbersAfterConvertedToInt[i] % 2 == 0)
+                {
+                    sumeven += numbersAfterConvertedToInt[i];
+                }
+                else
+                {
+                    sumodd += numbersAfterConvertedToInt[i];
+                }
+            }
+            if(sumeven > sumodd)
+            {
+                return "even";
+            } 
+            else if( sumeven < sumodd )
+            {
+                return "odd";
+            }
+            else
+            {
+                return "equal";
+            }
+
+        }
+        public static int Binary_To_Octal(string b)
+        {
+            List<string> result = new List<string>();
             int Element = 0;
             int Power = 0;
-            char[] binaryBeforeConverted = binaryNumber.ToCharArray();
+            char[] binaryBeforeConverted = b.ToCharArray();
             int[] binaryAfterConverted = new int[binaryBeforeConverted.Length];
 
             for (int i = 0; i < binaryBeforeConverted.Length; i++)
@@ -20,7 +96,6 @@ namespace soluations
                 binaryAfterConverted[i] = Convert.ToInt32(char.GetNumericValue(binaryBeforeConverted[i]));
             }
 
-            //binaryAfterConverted = binaryAfterConverted.Reverse().ToArray();
 
             for (int i = 0; i < binaryAfterConverted.Length; i += 3)
             {
@@ -32,18 +107,17 @@ namespace soluations
                     }
                     else
                     {
-                        Element += 0; //Convert.ToInt32(Math.Pow(0, Power));
+                        Element += 0; 
                     }
                     Power++;
                 }
-                result.Add(Element);
+                result.Add(Element.ToString());
                 Element = 0;
                 Power = 0;
             }
 
-           
 
-            return result.ToArray();
+            return Convert.ToInt32(string.Join("",result));
         }
         public static int[] Capitals(string word)
         {
@@ -245,5 +319,7 @@ namespace soluations
 
             return isEqual ? false : true;
         }
+
+
     }
 }
