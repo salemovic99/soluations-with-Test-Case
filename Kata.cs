@@ -8,6 +8,71 @@ namespace soluations
     public static class Kata
     {
 
+        public static string first_n_vowels(string phrase, int n)
+        {
+            // write your code here
+            if (n > 5)
+                return "invalid";
+
+            string resuilt = string.Empty;
+
+            for (int i = 0; i < phrase.Length; i++)
+            {
+                if (resuilt.Length == n)
+                    break;
+
+                if (isVowles(phrase[i]))
+                    resuilt += phrase[i];
+            }
+
+            return resuilt;
+
+        }
+        static bool isVowles(char value)
+        {
+            char[] vowles = { 'a', 'i', 'o', 'e', 'u' };
+            for (int i = 0; i < vowles.Length; i++)
+            {
+                if (vowles[i] == value || Convert.ToChar(vowles[i].ToString().ToUpper()) == value)
+                    return true;
+            }
+
+            return false;
+        }
+        public static string cap_space(string txt)
+        {
+            // write your code here
+            string resuilt = String.Empty;
+
+            for (int i = 0; i < txt.Length; i++)
+            {
+                if (char.IsUpper(txt[i]))
+                {
+                    resuilt += " " + txt[i].ToString().ToLower();
+                }
+                else
+                {
+                    resuilt += txt[i];
+                }
+
+            }
+
+            return resuilt;
+
+        }
+        public static string date_format(string date)
+        {
+            // write your code here
+            string year = date.Substring(0, 4);
+            string month = date.Length > 8 ? date.Substring(5, 2) : date.Substring(5, 1);
+            string day = date.Length > 8 ? date.Substring(8, 2) : date.Substring(7, 1);
+
+            string FormatTwo = date.Replace('/', '-');
+            string FormatThree = month + "/" + day + "/" + year;
+
+            return date + " | " + FormatTwo + " | " + FormatThree;
+
+        }
         public static bool KsumSubset(string datestring)
         {
 
